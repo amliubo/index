@@ -1,11 +1,10 @@
 import React from "react";
-import "./App.css";
-import BackgroundEffect from "./BackgroundEffect";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <div className="App">
-      <BackgroundEffect />
+      <Home />
     </div>
   );
 }
