@@ -1,11 +1,11 @@
 import React from "react";
 import "./Home.css";
-import BackgroundEffect from "../../components/indexbg";
+import IndexBG from "../../components/indexbg";
 
 function Home() {
     return (
         <div className="home-page">
-            <BackgroundEffect />
+            <IndexBG />
         </div>
     );
 }
