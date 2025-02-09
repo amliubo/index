@@ -1,17 +1,16 @@
-/* 设置导航栏背景渐变和透明度 */
+/* Navbar.css */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(90deg, rgba(45, 45, 45, 0.9), rgba(65, 65, 65, 0.9));
     color: #fff;
     padding: 15px 0;
     z-index: 1000;
     display: flex;
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease; /* 动画效果 */
+    background-color: #333; /* 设置背景颜色 */
 }
 
 .navbar ul {
@@ -22,42 +21,17 @@
     justify-content: center;
 }
 
-/* 设置菜单项 */
 .navbar li {
     margin: 0 20px;
 }
 
-/* 设置链接样式 */
 .navbar a {
     color: #fff;
     text-decoration: none;
     font-size: 18px;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    transition:
-        color 0.3s ease,
-        transform 0.3s ease; /* 过渡效果 */
-}
-
-/* 设置悬浮效果 */
-.navbar a:hover {
-    color: #00ff99; /* 绿色光效 */
-    transform: scale(1.1); /* 放大效果 */
-}
-
-/* 在页面滚动时改变背景 */
-body.scroll .navbar {
-    background: linear-gradient(90deg, rgba(45, 45, 45, 0.9), rgba(65, 65, 65, 1));
-}
-
-/* 添加响应式布局 */
-@media (max-width: 768px) {
-    .navbar ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .navbar li {
-        margin: 10px 0;
-    }
+    font-family: 'Courier New', Courier, monospace; /* 设置字体样式 */
+    font-weight: bold;
+    text-transform: uppercase; /* 大写字母 */
+    letter-spacing: 2px; /* 字母间距 */
+    transition: color 0.3s ease;
 }

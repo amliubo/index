@@ -1,71 +1,53 @@
 import React, { useEffect, useState } from "react";
+import { getLetterShape } from "./letterShape"
 import "./IndexBG.css";
 
 const IndexBG = () => {
-  const shapeSize = { rows: 40, cols: 120 }; // 矩阵大小
-  const textSpeed = 5; // 速度（毫秒）
+  const shapeSize = { rows: 40, cols: 70 };
+  const textSpeed = 50;
+  const words = ["HELLO", "WORLD", "INNOVATE", "LIUBO"];
 
   const [backgroundText, setBackgroundText] = useState(generateEmptyGrid());
-  const [targetShape, setTargetShape] = useState(generateRectangle());
-  const [transitioning, setTransitioning] = useState(false); // 是否正在变换形状
+  const [targetText, setTargetText] = useState(generateWordShape(words[0]));
+  const [transitioning, setTransitioning] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0); // 当前单词索引
 
   // **生成空矩阵**
   function generateEmptyGrid() {
     return Array(shapeSize.rows).fill(" ".repeat(shapeSize.cols));
   }
 
-  // **生成矩形**
-  function generateRectangle() {
-    return Array(shapeSize.rows)
-      .fill("")
-      .map(() => Array(shapeSize.cols).fill("■"))
-      .map((row) => row.join(""));
+  // **生成单词形状**
+  function generateWordShape(word) {
+    const grid = generateEmptyGrid().map(row => row.split(""));
+
+    const startX = Math.floor((shapeSize.cols - word.length * 6) / 2);
+    const startY = Math.floor(shapeSize.rows / 2 - 2);
+
+    for (let i = 0; i < word.length; i++) {
+      const letter = getLetterShape(word[i]);
+      for (let y = 0; y < 5; y++) {
+        for (let x = 0; x < 5; x++) {
+          if (letter[y][x] === 1) {
+            grid[startY + y][startX + i * 6 + x] = "■";
+          }
+        }
+      }
+    }
+    return grid.map(row => row.join(""));
   }
 
-  // **生成圆形**
-  function generateCircle() {
-    const radius = Math.min(shapeSize.rows, shapeSize.cols) / 3;
-    const centerX = shapeSize.cols / 2;
-    const centerY = shapeSize.rows / 2;
-    return Array(shapeSize.rows)
-      .fill("")
-      .map((_, y) =>
-        Array(shapeSize.cols)
-          .fill("")
-          .map((_, x) =>
-            Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)) <= radius
-              ? "●"
-              : " "
-          )
-          .join("")
-      );
-  }
-
-  // **生成三角形**
-  function generateTriangle() {
-    return Array(shapeSize.rows)
-      .fill("")
-      .map((_, y) =>
-        Array(shapeSize.cols)
-          .fill("")
-          .map((_, x) => (x >= y / 2 && x < shapeSize.cols - y / 2 ? "▲" : " "))
-          .join("")
-      );
-  }
-
-  // **逐步过渡形状**
+  // **逐步变换**
   useEffect(() => {
     if (!transitioning) return;
-
     const updatePixels = () => {
       let newText = [...backgroundText];
       let changes = [];
 
-      // **计算需要变化的点**
       for (let i = 0; i < shapeSize.rows; i++) {
         for (let j = 0; j < shapeSize.cols; j++) {
           const oldChar = newText[i][j];
-          const newChar = targetShape[i][j];
+          const newChar = targetText[i][j];
 
           if (oldChar !== newChar) {
             changes.push({ x: i, y: j, value: newChar });
@@ -74,12 +56,11 @@ const IndexBG = () => {
       }
 
       if (changes.length === 0) {
-        setTransitioning(false); // 形状转换完成
+        setTransitioning(false);
         return;
       }
 
-      // **随机修改一部分像素**
-      const numChanges = Math.max(1, Math.floor(changes.length * 0.05)); // 每帧改变5%
+      const numChanges = Math.max(1, Math.floor(changes.length * 0.1));
       for (let k = 0; k < numChanges; k++) {
         const { x, y, value } = changes[Math.floor(Math.random() * changes.length)];
         newText[x] = newText[x].substring(0, y) + value + newText[x].substring(y + 1);
@@ -90,20 +71,22 @@ const IndexBG = () => {
 
     const interval = setInterval(updatePixels, textSpeed);
     return () => clearInterval(interval);
-  }, [backgroundText, targetShape, transitioning]);
+  }, [backgroundText, targetText, transitioning]);
 
-  // **定期更换形状**
+  // **定期更换单词**
   useEffect(() => {
-    const changeShape = () => {
+    const changeWord = () => {
       if (!transitioning) {
         setTransitioning(true);
-        setTargetShape([generateRectangle, generateCircle, generateTriangle][Math.floor(Math.random() * 3)]());
+        const nextIndex = (wordIndex + 1) % words.length;
+        setWordIndex(nextIndex);
+        setTargetText(generateWordShape(words[nextIndex]));
       }
     };
 
-    const shapeInterval = setInterval(changeShape, 8000); // 每8秒切换形状
-    return () => clearInterval(shapeInterval);
-  }, [transitioning]);
+    const wordInterval = setInterval(changeWord, 5000); // 每5秒换一次单词
+    return () => clearInterval(wordInterval);
+  }, [transitioning, wordIndex]);
 
   return (
     <div className="background-container">
