@@ -60,7 +60,7 @@ const loadImage = (src) =>
 
 const IndexBG = () => {
   const shapeSize = { rows: 70, cols: 180 };
-  const textSpeed = 180;
+  const textSpeed = 100;
   const [backgroundText, setBackgroundText] = useState(
     Array(shapeSize.rows).fill(" ".repeat(shapeSize.cols))
   );
