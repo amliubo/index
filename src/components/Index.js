@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./IndexBG.css";
+import "./Index.css";
 
 const images = [
   'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
@@ -60,7 +60,7 @@ const loadImage = (src) =>
 
 const IndexBG = () => {
   const shapeSize = { rows: 70, cols: 180 };
-  const textSpeed = 50;
+  const textSpeed = 180;
   const [backgroundText, setBackgroundText] = useState(
     Array(shapeSize.rows).fill(" ".repeat(shapeSize.cols))
   );
@@ -77,6 +77,7 @@ const IndexBG = () => {
           shapeSize.rows
         );
         setTargetText(initialShape);
+        setTransitioning(true);
       } catch (error) {
         console.error("img loading err:", error);
       }
