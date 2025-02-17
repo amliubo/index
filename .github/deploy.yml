@@ -3,34 +3,33 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # 监听 main 分支的更新
+      - main # 触发条件：代码推送到main分支时触发
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest # 使用 Ubuntu 环境
 
     steps:
-      # 获取代码
+      # 1. Checkout 代码
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # 设置 Node.js 环境（如果是 React 项目等需要构建的项目）
+      # 2. 设置 Node.js 环境
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "22" # 设置 Node.js 版本
+          node-version: "22" # 使用你项目的 Node.js 版本
 
-      # 安装依赖并构建项目
-      - name: Install dependencies and build
-        run: |
-          npm install
-          npm run build  # 构建项目，生成静态文件
+      # 3. 安装依赖
+      - name: Install dependencies
+        run: npm install
 
-      # 部署到 GitHub Pages
+      # 4. 构建项目
+      - name: Build project
+        run: npm run build
+
+      # 5. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages # 部署到 gh-pages 分支
-          folder: build # 如果是 React 项目，这里是构建后的目录
+        run: npm run deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 使用 GitHub 的默认 token
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # 使用 GitHub token 进行授权
