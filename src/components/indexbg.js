@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./IndexBG.css";
 
-// 图片资源
 const images = [
   'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
   "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
@@ -14,7 +13,6 @@ const images = [
   'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
 ];
 
-// 图片处理工具函数
 const processImage = (imageData, width, height) => {
   const ASCII_CHARS = ["@", "#", "W", "S", "%", "?", "*", "+", "~", "-", ".", " "]; // 更多字符
   const grid = [];
@@ -35,14 +33,12 @@ const processImage = (imageData, width, height) => {
   return grid;
 };
 
-// 加载图片并生成像素网格
 const generateImageShape = async (imgSrc, width, height) => {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   canvas.width = width;
   canvas.height = height;
 
-  // 启用抗锯齿
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = "high";
 
@@ -53,7 +49,6 @@ const generateImageShape = async (imgSrc, width, height) => {
   return processImage(imageData, width, height);
 };
 
-// 图片加载工具函数
 const loadImage = (src) =>
   new Promise((resolve, reject) => {
     const img = new Image();
@@ -63,10 +58,9 @@ const loadImage = (src) =>
     img.src = src;
   });
 
-// 主组件
 const IndexBG = () => {
-  const shapeSize = { rows: 60, cols: 140 }; // 更高的分辨率
-  const textSpeed = 50; // 切换速度
+  const shapeSize = { rows: 70, cols: 180 };
+  const textSpeed = 50;
   const [backgroundText, setBackgroundText] = useState(
     Array(shapeSize.rows).fill(" ".repeat(shapeSize.cols))
   );
@@ -74,7 +68,6 @@ const IndexBG = () => {
   const [transitioning, setTransitioning] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
 
-  // 初始化加载第一张图片
   useEffect(() => {
     const loadInitialImage = async () => {
       try {
@@ -85,13 +78,12 @@ const IndexBG = () => {
         );
         setTargetText(initialShape);
       } catch (error) {
-        console.error("图片加载失败:", error);
+        console.error("img loading err:", error);
       }
     };
     loadInitialImage();
   }, []);
 
-  // 逐步变换像素点
   useEffect(() => {
     if (!transitioning || targetText.length === 0) return;
 
@@ -99,7 +91,6 @@ const IndexBG = () => {
       let newText = [...backgroundText];
       let changes = [];
 
-      // 查找需要变化的像素点
       for (let i = 0; i < shapeSize.rows; i++) {
         for (let j = 0; j < shapeSize.cols; j++) {
           if (backgroundText[i][j] !== targetText[i][j]) {
@@ -108,13 +99,11 @@ const IndexBG = () => {
         }
       }
 
-      // 如果没有变化，停止切换
       if (changes.length === 0) {
         setTransitioning(false);
         return;
       }
 
-      // 每次更新10%的像素点
       const numChanges = Math.max(1, Math.floor(changes.length * 0.1));
       for (let k = 0; k < numChanges; k++) {
         const { x, y, value } = changes[Math.floor(Math.random() * changes.length)];
@@ -128,7 +117,6 @@ const IndexBG = () => {
     return () => clearInterval(interval);
   }, [backgroundText, targetText, transitioning]);
 
-  // 定期切换图片
   useEffect(() => {
     const changeImage = async () => {
       if (!transitioning) {
@@ -141,11 +129,10 @@ const IndexBG = () => {
         );
         setImageIndex(nextIndex);
         setTargetText(newShape);
-
       }
     };
 
-    const interval = setInterval(changeImage, 5000); // 每5秒切换一次
+    const interval = setInterval(changeImage, 5000);
     return () => clearInterval(interval);
   }, [transitioning, imageIndex]);
 
