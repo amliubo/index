@@ -42,7 +42,12 @@ jobs:
       - name: Build project
         run: npm run predeploy
 
-      # 7. 部署到 GitHub Pages
+      # 7. 设置 GitHub Remote 为 SSH
+      - name: Set up SSH for GitHub
+        run: |
+          git remote set-url origin git@github.com:${{ github.repository }}.git
+
+      # 8. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
