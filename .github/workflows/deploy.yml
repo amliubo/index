@@ -30,9 +30,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # 5. 构建项目
+      - name: Build project
+        run: npm run predeploy
+
       # 5. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
-        run: npm run predeploy
         run: npm run deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
