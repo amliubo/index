@@ -20,34 +20,28 @@ jobs:
           git config --global user.email "amliubo@163.com"
           git config --global user.name "刘博"
 
-      # 3. 设置 SSH 密钥
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      # 4. 设置 Node.js 环境
+      # 3. 设置 Node.js 环境
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: "22"
 
-      # 5. 安装依赖
+      # 4. 安装依赖
       - name: Install dependencies
         run: npm install
 
-      # 6. 构建项目
+      # 5. 构建项目
       - name: Build project
         run: npm run predeploy
 
-      # 7. 设置 GitHub Remote 为 SSH
-      - name: Set up SSH for GitHub
+      # 6. 设置 GitHub Remote 为 HTTPS 并使用 GitHub Token
+      - name: Set git remote URL with token
         run: |
-          git remote set-url origin git@github.com:${{ github.repository }}.git
+          git remote set-url origin https://$GH_TOKEN@github.com/${{ github.repository }}.git
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      # 8. 部署到 GitHub Pages
+      # 7. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
