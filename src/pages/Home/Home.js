@@ -13,7 +13,7 @@ function Home() {
             <div className="home-page">
                 <MenuBar />
                 <Routes>
-                    <Route path="/" element={<Index />} />
+                    <Route path="/index" element={<Index />} />
                     <Route path="/about" element={<AboutInfo />} />
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                 </Routes>
