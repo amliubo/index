@@ -14,11 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. 设置 Git 用户信息
-      - name: Set git config
+      # 2. 设置 SSH 密钥
+      - name: Set up SSH
         run: |
-          git config --global user.email "amliubo@163.com"
-          git config --global user.name "刘博"
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       # 3. 设置 Node.js 环境
       - name: Set up Node.js
@@ -34,7 +36,7 @@ jobs:
       - name: Build project
         run: npm run predeploy
 
-      # 5. 部署到 GitHub Pages
+      # 6. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
