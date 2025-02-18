@@ -38,7 +38,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://amliubo.github.io/index",
+  "homepage": "https://amliubo.github.io",
   "devDependencies": {
     "gh-pages": "^6.2.0"
   }
