@@ -83,7 +83,7 @@ const IndexBG = () => {
       }
     };
     loadInitialImage();
-  }, []);
+  }, [shapeSize.cols, shapeSize.rows]);
 
   useEffect(() => {
     if (!transitioning || targetText.length === 0) return;
@@ -116,7 +116,7 @@ const IndexBG = () => {
 
     const interval = setInterval(updatePixels, textSpeed);
     return () => clearInterval(interval);
-  }, [backgroundText, targetText, transitioning]);
+  }, [backgroundText, targetText, transitioning, shapeSize.cols, shapeSize.rows]);
 
   useEffect(() => {
     const changeImage = async () => {
@@ -135,7 +135,7 @@ const IndexBG = () => {
 
     const interval = setInterval(changeImage, 5000);
     return () => clearInterval(interval);
-  }, [transitioning, imageIndex]);
+  }, [transitioning, imageIndex, shapeSize.cols, shapeSize.rows]);
 
   return (
     <div className="background-container">
