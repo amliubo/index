@@ -14,7 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. 设置 SSH 密钥
+      # 2. 设置 Git 用户信息
+      - name: Set git config
+        run: |
+          git config --global user.email "amliubo@163.com"
+          git config --global user.name "刘博"
+
+      # 3. 设置 SSH 密钥
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
@@ -22,21 +28,21 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      # 3. 设置 Node.js 环境
+      # 4. 设置 Node.js 环境
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "22"
 
-      # 4. 安装依赖
+      # 5. 安装依赖
       - name: Install dependencies
         run: npm install
 
-      # 5. 构建项目
+      # 6. 构建项目
       - name: Build project
         run: npm run predeploy
 
-      # 6. 部署到 GitHub Pages
+      # 7. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
