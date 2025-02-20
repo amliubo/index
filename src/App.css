@@ -1,0 +1,28 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+}
+
+.background-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 88vh;
+    overflow: hidden;
+}
+
+.background-text {
+    color: rgba(255, 255, 255, 0.8);
+    white-space: pre-wrap;
+    text-align: center;
+    letter-spacing: 2px;
+}

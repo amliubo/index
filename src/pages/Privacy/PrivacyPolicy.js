@@ -1,64 +1,99 @@
 import React from 'react';
 
-const PrivacyPolicy = () => {
-    return (
-        <div style={{ color: '#fff', padding: '20px', fontSize: '12px' }}>
-            <h1>隐私协议</h1>
-            <p>最后更新日期：2025年2月16日</p>
+const styles = {
+    container: {
+        color: '#E0E0E0',
+        fontFamily: '"Orbitron", "Rajdhani", sans-serif',
+        fontSize: '16px',
+        lineHeight: '1.8',
+        maxWidth: '800px',
+        margin: '0 auto',
+        paddingTop: '80px',
+        textAlign: 'left'
+    },
+    title: {
+        fontSize: '28px',
+        textAlign: 'center',
+        color: '#00FFF6',
+        letterSpacing: '2px',
+        textShadow: '0px 0px 10px rgba(0, 255, 246, 0.6)',
+        fontWeight: '400'
+    },
+    section: {
+        fontSize: '20px',
+        color: '#00FFF6',
+        marginTop: '20px',
+        letterSpacing: '1px',
+        textShadow: '0px 0px 5px rgba(0, 255, 246, 0.5)',
+        fontWeight: '400'
+    },
+    list: {
+        marginLeft: '20px',
+        listStyleType: 'disc',
+    },
+    link: {
+        color: '#00FFF6',
+        textDecoration: 'none'
+    }
+};
 
-            <h2>1. 信息收集</h2>
-            <p>
-                在使用我们的服务时，我们可能会收集您的个人信息，包括但不限于您的姓名、电子邮件地址、设备信息等。这些信息将用于提供和改善我们的服务。
-            </p>
+const PrivacyPolicy = () => (
+    <div style={styles.container}>
+        <div style={styles.title}>隐私协议</div>
+        <p>更新日期：2025年2月16日</p>
 
-            <h2>2. 信息使用</h2>
-            <p>我们收集的信息将用于以下目的：</p>
-            <ul>
-                <li>提供和优化我们的服务</li>
-                <li>向您发送重要通知和更新</li>
-                <li>改进用户体验和应用功能</li>
-            </ul>
+        <div style={styles.section}>1. 信息收集</div>
+        <p>在您使用 DeepCraft 过程中，我们可能会收集以下信息：</p>
+        <ul style={styles.list}>
+            <li><strong>账户信息：</strong>如您的用户名、电子邮件等（用于身份验证）。</li>
+            <li><strong>设备信息：</strong>如设备型号、操作系统、IP 地址（用于优化用户体验和安全性）。</li>
+            <li><strong>聊天数据：</strong>您与 AI 交互的内容，仅用于提供服务，不会用于其他用途。</li>
+            <li><strong>应用使用数据：</strong>如使用时长、功能交互情况（用于改进服务）。</li>
+        </ul>
 
-            <h2>3. 信息共享</h2>
-            <p>我们不会将您的个人信息出售、出租或分享给第三方，除非出于以下目的：</p>
-            <ul>
-                <li>法律要求或政府要求</li>
-                <li>为了保护我们的权利或财产</li>
-                <li>在应用功能或合作伙伴需要的情况下</li>
-            </ul>
+        <div style={styles.section}>2. 信息使用</div>
+        <p>我们收集的信息主要用于：</p>
+        <ul style={styles.list}>
+            <li>提供、维护和改进 DeepCraft 的功能与服务。</li>
+            <li>向您提供技术支持和重要通知。</li>
+            <li>保障数据安全，防止欺诈或滥用行为。</li>
+            <li>分析用户行为，优化 AI 交互体验。</li>
+        </ul>
 
-            <h2>4. 数据安全</h2>
-            <p>
-                我们采取合理的技术和组织措施来保护您的个人信息不被未经授权的访问、披露、修改或销毁。然而，请注意，任何通过互联网传输的方式都无法做到100%的安全保障。
-            </p>
+        <div style={styles.section}>3. 信息存储</div>
+        <p>您的数据将安全存储在我们的服务器上，我们会采取合理措施防止数据泄露或未经授权访问。</p>
+        <p>如果您希望删除您的个人数据，请联系我们（详见“联系我们”）。</p>
 
-            <h2>5. 第三方链接</h2>
-            <p>
-                我们的应用可能包含指向第三方网站或服务的链接。我们不控制这些第三方网站的内容和隐私政策，因此不对其负责。
-            </p>
+        <div style={styles.section}>4. 信息共享</div>
+        <p>我们不会出售、出租或泄露您的个人信息，除非：</p>
+        <ul style={styles.list}>
+            <li>符合法律法规或政府要求。</li>
+            <li>保护我们或其他用户的合法权益。</li>
+            <li>在获得您的明确同意后，向合作伙伴提供必要信息（如 AI 技术提供方）。</li>
+        </ul>
 
-            <h2>6. 儿童隐私</h2>
-            <p>
-                本应用不针对13岁以下的儿童。如果我们得知收集了儿童的个人信息，我们会尽快删除相关数据。
-            </p>
+        <div style={styles.section}>5. 数据安全</div>
+        <p>我们采取加密存储、访问控制等安全措施，确保您的个人数据安全。</p>
+        <p>但请注意，互联网传输并非绝对安全，您需自行承担一定风险。</p>
 
-            <h2>7. 用户权利</h2>
-            <p>
-                您有权访问、更正或删除我们收集的您的个人信息。如果您希望行使这些权利，请通过邮箱[amliubo@163.com]联系我们。
-            </p>
+        <div style={styles.section}>6. 第三方服务</div>
+        <p>DeepCraft 可能集成第三方 AI 模型或 API（如 DeepSeek-R1）。请参考这些服务提供商的隐私政策。</p>
 
-            <h2>8. 同意和修改</h2>
-            <p>
-                使用本应用即表示您同意我们收集、使用和分享您的个人信息。如果我们对本隐私协议进行修改，我们将在本页面更新相关内容。请定期查看本协议。
-            </p>
+        <div style={styles.section}>7. 儿童隐私</div>
+        <p>DeepCraft 不适用于 13 岁以下儿童，我们不会有意收集儿童信息，如有发现，请联系我们删除相关数据。</p>
 
-            <h2>9. 联系我们</h2>
-            <p>如果您对本隐私协议有任何疑问或需要进一步了解，请通过以下方式与我们联系：</p>
-            <ul>
-                <li>电子邮件: amliubo@163.com</li>
-            </ul>
-        </div>
-    );
-}
+        <div style={styles.section}>8. 用户权利</div>
+        <p>您可随时联系我们以访问、修改或删除您的个人信息。</p>
+
+        <div style={styles.section}>9. 隐私协议更新</div>
+        <p>我们可能会更新本隐私协议，修改后将在本页面通知您，建议定期查看。</p>
+
+        <div style={styles.section}>10. 联系我们</div>
+        <p>如有任何隐私问题，请通过以下方式联系我们：</p>
+        <ul style={styles.list}>
+            <li>电子邮件: <a href="mailto:amliubo@163.com" style={styles.link}>amliubo@163.com</a></li>
+        </ul>
+    </div>
+);
 
 export default PrivacyPolicy;
