@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css'
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
-import MenuBar from './components/MenuBar';
-import Index from './pages/index/Index';
-import AboutInfo from "./pages/about/AboutInfo";
-import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
-import Support from './pages/support/Support';
-import Copyright from "./components/Copyright";
+import MenuBar from './components/MenuBar.js';
+import Index from './pages/Index/Index.js';
+import AboutInfo from "./pages/About/AboutInfo.js";
+import PrivacyPolicy from "./pages/Privacy/PrivacyPolicy.js";
+import Support from './pages/Support/Support.js';
+import Copyright from "./components/Copyright.js";
 
 function App() {
   return (
