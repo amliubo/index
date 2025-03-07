@@ -6,7 +6,7 @@ const Copyright = () => {
 
     return (
         <div className="copyright-container">
-            <p>&copy; {currentYear} DeepCraft. All Rights Reserved.</p>
+            <p>&copy; {currentYear} DeepCraft.</p>
         </div>
     );
 };
