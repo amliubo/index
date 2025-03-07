@@ -28,7 +28,7 @@ const styles = {
     }
 };
 
-const AboutInfo = () => (
+const About = () => (
     <div style={styles.container}>
         <div style={styles.title}>DeepCraft</div>
         <p style={styles.paragraph}>基于 DeepSeek-R1 接口实现的智能工具，旨在提升工作效率与创造力。</p>
@@ -39,4 +39,4 @@ const AboutInfo = () => (
     </div>
 );
 
-export default AboutInfo;
+export default About;

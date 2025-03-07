@@ -4,15 +4,14 @@ const styles = {
     container: {
         color: '#E0E0E0',
         fontFamily: '"Orbitron", "Rajdhani", sans-serif',
-        fontSize: '16px',
-        lineHeight: '1.8',
+        fontSize: '14px',
         maxWidth: '800px',
         margin: '0 auto',
         paddingTop: '80px',
         textAlign: 'left'
     },
     title: {
-        fontSize: '26px',
+        fontSize: '20px',
         textAlign: 'center',
         color: '#00FFF6',
         letterSpacing: '2px',
@@ -20,7 +19,7 @@ const styles = {
         fontWeight: '400'
     },
     section: {
-        fontSize: '20px',
+        fontSize: '14px',
         color: '#00FFF6',
         marginTop: '20px',
         letterSpacing: '1px',
