@@ -2,8 +2,7 @@
 
 import axios from 'axios';
 
-// 设置基础的API URL
-const API_URL = 'https://your-api-url';
+const API_URL = 'http://139.196.252.254:8000';
 
 // 登录接口
 export const loginUser = (email, password) => {
@@ -15,4 +14,18 @@ export const registerUser = (email, password) => {
     return axios.post(`${API_URL}/register`, { email, password });
 };
 
-// 你可以继续添加其他 API 函数，例如获取用户信息、退出登录等
+// 会话接口，支持流式处理
+export const ChatMsg = async (sessionId, token, message) => {
+    const response = await fetch(`${API_URL}/chat`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ session_id: sessionId, token: token, message: message }),
+    });
+
+    if (!response.ok) {
+        throw new Error('请求失败');
+    }
+    return response;
+};

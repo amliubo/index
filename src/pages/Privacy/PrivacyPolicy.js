@@ -91,6 +91,7 @@ const PrivacyPolicy = () => (
         <ul style={styles.list}>
             <li>电子邮件: <a href="mailto:amliubo@163.com" style={styles.link}>amliubo@163.com</a></li>
         </ul>
+        <br />
     </div>
 );
 

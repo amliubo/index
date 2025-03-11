@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
-import { registerUser } from '../../api';
-import './Register.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../api";
+import "./Register.css";
 
 const Register = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         if (password !== confirmPassword) {
-            setError('密码不一致');
+            setError("密码不一致");
+            setLoading(false);
             return;
         }
 
-        setLoading(true);
-
         try {
-            const response = await registerUser(email, password);
-            console.log('注册成功', response.data);
-            // 注册成功后可以跳转到登录页或直接登录
+            const { data } = await registerUser(email, password);
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                navigate("/chat");
+            } else {
+                setError("注册失败，请稍后再试");
+            }
         } catch (err) {
-            setError('注册失败，请稍后重试');
-            console.error(err);
+            setError("注册失败，请稍后再试");
+            console.error(err.response?.data || err.message);
         } finally {
             setLoading(false);
         }
@@ -33,36 +39,36 @@ const Register = () => {
 
     return (
         <div className="register-container">
-            <h2>注册</h2>
-            {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleSubmit} className="register-form">
+            <h2>创建一个新账号</h2>
+            <form onSubmit={handleSubmit} className="form">
                 <input
                     type="email"
+                    className="input-field"
                     placeholder="请输入邮箱"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="input-field"
                 />
                 <input
                     type="password"
+                    className="input-field"
                     placeholder="请输入密码"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="input-field"
                 />
                 <input
                     type="password"
+                    className="input-field"
                     placeholder="确认密码"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
-                    className="input-field"
                 />
                 <button type="submit" className="btn-register" disabled={loading}>
-                    {loading ? '注册中...' : '注册'}
+                    {loading ? "加载中..." : "注册"}
                 </button>
+                {error && <div className="error-message">{error}</div>}
             </form>
         </div>
     );

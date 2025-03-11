@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
-import { loginUser } from '../../api';
-import './Login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../api";
+import "./Login.css";
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            const response = await loginUser(email, password);  // 使用 api.js 中的 loginUser 函数
-            console.log('登录成功', response.data);
-            // 在这里处理登录成功后的逻辑
+            const { data } = await loginUser(email, password);
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("userEmail", email);
+                navigate("/chat");
+            } else {
+                setError("登录失败，检查邮箱和密码");
+            }
         } catch (err) {
-            setError('登录失败，请检查邮箱和密码');
-            console.error(err);
+            setError("登录失败，检查邮箱和密码");
+            console.error(err.response?.data || err.message);
         } finally {
             setLoading(false);
         }
@@ -26,28 +33,28 @@ const Login = () => {
 
     return (
         <div className="login-container">
-            <h2>登录</h2>
-            {error && <p className="error-message">{error}</p>}
-            <form onSubmit={handleSubmit} className="login-form">
+            <h2>欢迎回来</h2>
+            <form onSubmit={handleSubmit} className="form">
                 <input
                     type="email"
+                    className="input-field"
                     placeholder="请输入邮箱"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="input-field"
                 />
                 <input
                     type="password"
+                    className="input-field"
                     placeholder="请输入密码"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="input-field"
                 />
                 <button type="submit" className="btn-login" disabled={loading}>
-                    {loading ? '登录中...' : '登录'}
+                    {loading ? "加载中..." : "登录"}
                 </button>
+                {error && <div className="error-message">{error}</div>}
             </form>
         </div>
     );

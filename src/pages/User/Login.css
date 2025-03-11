@@ -4,26 +4,36 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 89vh;
     background-color: #f7f7f7;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 h2 {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
 }
 
 /* 表单输入框 */
+.form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .input-field {
     width: 100%;
-    padding: 14px;
-    margin: 10px 0;
+    padding: 12px;
+    margin: 0;
     border-radius: 8px;
     border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
+    font-size: 14px;
+    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
@@ -41,11 +51,19 @@ h2 {
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .btn-login:hover {
     background: linear-gradient(135deg, #ff4500, #ff6600);
+}
+
+/* 错误信息 */
+.error-message {
+    color: #ff4500;
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: center;
 }
