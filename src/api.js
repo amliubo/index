@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://139.196.252.254:8000';
+const API_URL = 'http://139.196.252.254:88';
 
 // 登录接口
 export const loginUser = (email, password) => {
