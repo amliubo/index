@@ -42,13 +42,11 @@
 /* 🗨 通用消息样式 */
 .message {
     max-width: 70%;
-    padding: 12px 16px;
-    margin: 8px 0;
+    padding: 12px 14px;
     border-radius: 12px;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.4; /* 调整行高 */
     word-break: break-word;
-    white-space: pre-wrap; /* 保持换行格式 */
 }
 
 /* 🧑‍💻 用户消息（靠右，蓝色气泡） */
@@ -64,20 +62,32 @@
     align-self: flex-start;
 }
 
+/* 📝 Markdown 代码区域（背景灰色） */
+.markdown-code {
+    background-color: #333; /* 设置背景色为灰色 */
+    color: #fff; /* 设置字体颜色为白色 */
+    padding: 12px;
+    border-radius: 8px;
+    font-family: "Courier New", Courier, monospace; /* 使用等宽字体 */
+    font-size: 12px; /* 设置字体大小 */
+    word-wrap: break-word;
+    white-space: pre-wrap; /* 保持换行 */
+    line-height: 1; /* 控制代码行高 */
+}
+
 /* ⌨ 输入框区域 */
 .input-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3%;
+    padding: 2%;
 }
 
 /* ⌨ 输入框 */
 .input-container textarea {
     width: 100%;
     max-width: 600px;
-    min-height: 60px;
-    padding: 15px;
+    padding: 14px;
     border-radius: 20px;
     border: 1px solid #555;
     background-color: #2a2a2a;
